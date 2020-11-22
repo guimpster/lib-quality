@@ -1,4 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { ConsolidatedData } from 'src/model';
 
 import { ElasticConsolidatedRepository } from '../repository/elastic.consolidated.repository';
 
@@ -14,5 +15,9 @@ export class ConsolidatedService {
         const data = await this.consolidatedRepository.consolidateIssues();
         // consolidate other info //
         await this.consolidatedRepository.bulkConsolidatedData(data);
+    }
+
+    public async searchByRepo(repo: String): Promise<ConsolidatedData> {
+        return this.consolidatedRepository.searchByRepo(repo);
     }
 }

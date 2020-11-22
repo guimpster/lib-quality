@@ -79,4 +79,18 @@ export class ElasticConsolidatedRepository extends ElasticBaseRepository {
             body: collect
         });
     }
+
+    public async searchByRepo(repo: String): Promise<ConsolidatedData> {
+        const { body } = await this.esRepository.search({
+            index: this.configService.get('GITHUB_CONSOLIDATED_INDEX'),
+            body: {
+                query: {
+                    match: {
+                        repo
+                    }
+                }
+            }
+        });
+        return body.hits?.hits[0]?._source;
+    }
 }

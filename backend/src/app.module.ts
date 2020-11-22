@@ -8,6 +8,7 @@ import { ElasticModule } from './repository/elastic.module';
 import { ConfigModule } from './config/config.module';
 import { CollectorService } from './service/collector.service';
 import { ConsolidatedService } from './service/consolidated.service';
+import { ConsolidatedController } from './controller/consolidated.controller';
 
 @Module({
   imports: [
@@ -15,7 +16,9 @@ import { ConsolidatedService } from './service/consolidated.service';
     ConfigModule,
     ElasticModule
   ],
-  controllers: [],
+  controllers: [
+    ConsolidatedController
+  ],
   providers: [
     CollectorJob,
     ConsolidateJob,

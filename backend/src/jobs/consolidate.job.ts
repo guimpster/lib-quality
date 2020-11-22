@@ -11,7 +11,7 @@ export class ConsolidateJob {
 
   constructor(private readonly consolidatedService: ConsolidatedService) {}
 
-  @Interval('issues-consolidator-job', 40*1000)
+  @Interval('issues-consolidator-job', 60*60*1000)
   async consolidateIssues() {
     this.logger.debug('Consolidating data from GitHub');
     await this.consolidatedService.consolidateData();

@@ -13,7 +13,7 @@ export class CollectorJob {
     private readonly collectorService: CollectorService
   ) {}
 
-  @Interval('issues-collector-job', 10*1000)
+  @Interval('issues-collector-job', 60*60*1000)
   async collectIssues() {
     this.logger.debug('Collecting issues from Github has started');
     await this.collectorService.collectIssues();
