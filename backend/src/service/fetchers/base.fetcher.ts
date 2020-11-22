@@ -2,17 +2,23 @@ import fetch from 'node-fetch';
 import { Logger, Injectable } from '@nestjs/common';
 
 import { GitHubBase } from '../../model';
+import { ConfigService } from 'src/config/config.service';
 
 @Injectable()
 export abstract class GitHubBaseFetcher<T extends GitHubBase> {
+
   private readonly logger = new Logger(GitHubBaseFetcher.name);
 
-  private readonly defaultHeaders = {
-    'Accept': 'application/vnd.github.v3+json',
-    'Authorization': 'token d90a25f0dbc4c1f9fbd05813dd0e4a9e9dbdccb3'
-  }
+  constructor(private readonly configService: ConfigService) {}
 
   abstract getUrl(): string;
+
+  protected getHeaders() {
+    return {
+      'Accept': 'application/vnd.github.v3+json',
+      'Authorization': `token ${this.configService.get('GIT_HUB_TOKEN')}`
+    }
+  }
 
   public async fetchPages(): Promise<Array<T[]>> {
     const totalPages = await this.getTotalPages();
@@ -25,7 +31,7 @@ export abstract class GitHubBaseFetcher<T extends GitHubBase> {
     this.logger.debug(`GET URL: ${fetchUrl}`)
     const response = await fetch(fetchUrl, {
       method: 'GET',
-      headers: this.defaultHeaders
+      headers: this.getHeaders()
     });
     if (!response.ok) throw Error(`Got an unexpected response: ${response.statusText}`);
     return response.json();
@@ -36,7 +42,7 @@ export abstract class GitHubBaseFetcher<T extends GitHubBase> {
     this.logger.debug(`HEAD URL: ${fetchUrl}`)
     const response = await fetch(fetchUrl, {
       method: 'HEAD',
-      headers: this.defaultHeaders
+      headers: this.getHeaders()
     });
     if (!response.ok) throw Error(`Got an unexpected response ${response.statusText}`);
     const linkHeader = response.headers.get('Link')

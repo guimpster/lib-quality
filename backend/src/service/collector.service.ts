@@ -18,6 +18,6 @@ export class CollectorService {
         this.logger.debug('Fetching issues from GitHub')
         const pages = await this.githubIssuesFetcher.fetchPages();
         this.logger.debug('Inserting issues on elasticsearch')
-        await Promise.all(pages.map(this.issueRepository.bulkIssues));
+        await Promise.all(pages.map((issuePage, page) => this.issueRepository.bulkIssues(issuePage, page)));
     }
 }

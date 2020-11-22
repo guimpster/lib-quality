@@ -10,8 +10,9 @@ export class ConsolidatedService {
   
     constructor(private readonly consolidatedRepository: ElasticConsolidatedRepository) {}
 
-    public async consolidateIssues() {
+    public async consolidateData() {
         const data = await this.consolidatedRepository.consolidateIssues();
+        // consolidate other info //
         await this.consolidatedRepository.bulkConsolidatedData(data);
     }
 }

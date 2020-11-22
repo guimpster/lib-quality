@@ -13,8 +13,8 @@ export class ConsolidateJob {
 
   @Timeout('issues-consolidator-job', 40*1000)
   async consolidateIssues() {
-    this.logger.debug('Consolidating issues from GitHub');
-    await this.consolidatedService.consolidateIssues();
-    this.logger.debug('Consolidating issues from Github has ended!');
+    this.logger.debug('Consolidating data from GitHub');
+    await this.consolidatedService.consolidateData();
+    this.logger.debug('Consolidating data from Github has ended!');
   }
 }

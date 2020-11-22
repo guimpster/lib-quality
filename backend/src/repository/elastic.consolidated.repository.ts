@@ -45,7 +45,7 @@ export class ElasticConsolidatedRepository extends ElasticBaseRepository {
     public async consolidateIssues(): Promise<ConsolidatedData[]> {
         const { body } = await this.esRepository.sql.query({
             body: {
-                query: `SELECT repo, COUNT(*) as qty_issues, AVG(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as avg_age, STDDEV_SAMP(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as std_age FROM \'${this.configService.get('GITHUB_ISSUES_INDEX')}\' GROUP BY repo`
+                query: `SELECT repo, COUNT(*) as qty_issues, AVG(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as avg_age, STDDEV_SAMP(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as std_age FROM \"${this.configService.get('GITHUB_ISSUES_INDEX')}\" GROUP BY repo`
             }
         });
         const data: ConsolidatedData[] = body.rows.map(([repo, qty_issues, avg_age, std_age]) => ({

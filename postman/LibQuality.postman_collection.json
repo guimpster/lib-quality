@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "11b8ee37-0075-4b77-9c7f-45cf182a85cc",
+		"name": "LibQuality",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GitHub Api",
+			"item": [
+				{
+					"name": "Issues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.github.v3+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "token d90a25f0dbc4c1f9fbd05813dd0e4a9e9dbdccb3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.github.com/repos/facebook/react/issues?page=1&per_page=100&sort=created",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"facebook",
+								"react",
+								"issues"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "100"
+								},
+								{
+									"key": "sort",
+									"value": "created"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.github.v3+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.github.com/repos/facebook/react/issues",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"facebook",
+								"react",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contributors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.github.v3+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.github.com/repos/facebook/react/issues",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"facebook",
+								"react",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stars",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/vnd.github.v3+json"
+							}
+						],
+						"url": {
+							"raw": "https://api.github.com/repos/facebook/react/stargazers",
+							"protocol": "https",
+							"host": [
+								"api",
+								"github",
+								"com"
+							],
+							"path": [
+								"repos",
+								"facebook",
+								"react",
+								"stargazers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Elasticsearch",
+			"item": [
+				{
+					"name": "tests",
+					"item": [
+						{
+							"name": "Mapping",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mappings\": {\r\n        \"properties\": {\r\n            \"repo\": {\r\n                \"type\": \"keyword\"\r\n            },\r\n            \"name\": {\r\n                \"type\": \"text\"\r\n            },\r\n            \"created_at\": {\r\n                \"type\": \"date\"\r\n            },\r\n            \"closed_at\": {\r\n                \"type\": \"date\"\r\n            }\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/tests",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insert",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Catarina Durant\",\r\n    \"repo\": \"react\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/tests/_doc",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"tests",
+										"_doc"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/tests/_doc/1",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"tests",
+										"_doc",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/tests/_search",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"tests",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consolidated SQL",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"query\": \"SELECT repo, COUNT(*) as qty_issues, AVG(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as avg_age, STDDEV_SAMP(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as std_age FROM tests GROUP BY repo\",\r\n    \"fetch_size\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/_sql?format=json",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"_sql"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "192.168.253.129:9200/tests",
+									"host": [
+										"192",
+										"168",
+										"253",
+										"129"
+									],
+									"port": "9200",
+									"path": [
+										"tests"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "github-issues",
+					"item": [
+						{
+							"name": "Index Mapping",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{elastic-url}}/github-issues",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stats",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{elastic-url}}/github-issues/_stats",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues",
+										"_stats"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Issues",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/github-issues/_search",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Issues Histogram",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/github-issues/_search",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/github-issues",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Count",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/github-issues/_count",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-issues",
+										"_count"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "github-consolidated",
+					"item": [
+						{
+							"name": "Consolidated SQL",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"query\": \"SELECT repo, COUNT(*) as qty_issues, AVG(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as avg_age, STDDEV_SAMP(DATE_DIFF('days', CAST(created_at AS DATETIME), CURRENT_TIMESTAMP())) as std_age FROM \\\"github-issues\\\" GROUP BY repo\",\r\n    \"fetch_size\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/_sql?format=json",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"_sql"
+									],
+									"query": [
+										{
+											"key": "format",
+											"value": "json"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consolidated",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{elastic-url}}/github-consolidated/_search",
+									"host": [
+										"{{elastic-url}}"
+									],
+									"path": [
+										"github-consolidated",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elastic-url}}",
+							"host": [
+								"{{elastic-url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nodes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elastic-url}}/_cat/nodes?v&pretty",
+							"host": [
+								"{{elastic-url}}"
+							],
+							"path": [
+								"_cat",
+								"nodes"
+							],
+							"query": [
+								{
+									"key": "v",
+									"value": null
+								},
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elastic-url}}/_cat/health",
+							"host": [
+								"{{elastic-url}}"
+							],
+							"path": [
+								"_cat",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Indices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{elastic-url}}/_cat/indices",
+							"host": [
+								"{{elastic-url}}"
+							],
+							"path": [
+								"_cat",
+								"indices"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

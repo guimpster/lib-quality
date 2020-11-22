@@ -6,6 +6,8 @@ import { ConsolidateJob } from './jobs/consolidate.job';
 import { GitHubIssuesFetcher } from './service/fetchers/issues.fetcher';
 import { ElasticModule } from './repository/elastic.module';
 import { ConfigModule } from './config/config.module';
+import { CollectorService } from './service/collector.service';
+import { ConsolidatedService } from './service/consolidated.service';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ConfigModule } from './config/config.module';
     CollectorJob,
     ConsolidateJob,
     GitHubIssuesFetcher,
+    CollectorService,
+    ConsolidatedService
   ],
 })
 export class AppModule {}
