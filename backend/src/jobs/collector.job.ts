@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Timeout } from '@nestjs/schedule';
+import { Interval } from '@nestjs/schedule';
 
 import { CollectorService } from '../service/collector.service';
 
@@ -13,7 +13,7 @@ export class CollectorJob {
     private readonly collectorService: CollectorService
   ) {}
 
-  @Timeout('issues-collector-job', 10*1000)
+  @Interval('issues-collector-job', 10*1000)
   async collectIssues() {
     this.logger.debug('Collecting issues from Github has started');
     await this.collectorService.collectIssues();

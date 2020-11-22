@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Timeout } from '@nestjs/schedule';
+import { Interval } from '@nestjs/schedule';
 
 import { ConsolidatedService } from '../service/consolidated.service';
 
@@ -11,7 +11,7 @@ export class ConsolidateJob {
 
   constructor(private readonly consolidatedService: ConsolidatedService) {}
 
-  @Timeout('issues-consolidator-job', 40*1000)
+  @Interval('issues-consolidator-job', 40*1000)
   async consolidateIssues() {
     this.logger.debug('Consolidating data from GitHub');
     await this.consolidatedService.consolidateData();
