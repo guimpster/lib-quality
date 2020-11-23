@@ -49,8 +49,7 @@ export class ElasticConsolidatedRepository extends ElasticBaseRepository {
             }
         });
         const data: ConsolidatedData[] = body.rows.map(([repo, qty_issues, avg_age, std_age]) => ({
-            id: `facebook/${repo}`,
-            org: 'facebook',
+            id: `${repo}`,
             repo,
             qty_issues,
             avg_age,
