@@ -561,7 +561,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"query\": { \"match_all\": {} },\r\n  \"sort\": [\r\n    { \"_id\": \"asc\" }\r\n  ]\r\n}",
+									"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"repo\": \"react\"\r\n        }\r\n    },\r\n    \"sort\": [\r\n        {\r\n            \"_id\": \"asc\"\r\n        }\r\n    ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -658,6 +658,35 @@
 							"path": [
 								"_cat",
 								"indices"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Backend",
+			"item": [
+				{
+					"name": "Get Consolidated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend-url}}/consolidated?repo=react",
+							"host": [
+								"{{backend-url}}"
+							],
+							"path": [
+								"consolidated"
+							],
+							"query": [
+								{
+									"key": "repo",
+									"value": "react"
+								}
 							]
 						}
 					},

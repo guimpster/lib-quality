@@ -42,13 +42,13 @@ export class ElasticIssueRepository extends ElasticBaseRepository {
         this.logger.debug(`Index ${this.configService.get('GITHUB_ISSUES_INDEX')} created/updated`);
     }
 
-    public async insertIssue(issue: Issue) {
+    public async insertIssue(issue: Issue, org: string, repo: string) {
         return this.esService.index({
             index: this.configService.get('GITHUB_ISSUES_INDEX'),
             body: {
                 id: issue.id,
-                org: 'facebook',
-                repo: 'react',
+                org,
+                repo,
                 issue_number: issue.number,
                 state: issue.state,
                 created_at: issue.created_at,
@@ -63,15 +63,15 @@ export class ElasticIssueRepository extends ElasticBaseRepository {
         this.logger.debug(`Now index ${this.configService.get('GITHUB_ISSUES_INDEX')} has ${count.count} issues!`)
     }
 
-    public async bulkIssues(issuePage: Array<Issue>, pageNumber: number) {
+    public async bulkIssues(issuePage: Array<Issue>, pageNumber: number, org: string, repo: string) {
         this.logger.debug(`Inserting page ${pageNumber} with ${issuePage.length} data`);
         const body = issuePage
             .map((issue, index) => ({
                 id: issue.id,
                 count: index,
                 pageNumber,
-                org: 'facebook',
-                repo: 'react',
+                org,
+                repo,
                 issue_number: issue.number,
                 state: issue.state,
                 created_at: issue.created_at,
