@@ -22,7 +22,7 @@ export const { Types, Creators } = createActions({
 
 export const addRepo = (state = INITIAL_STATE) => ({ ...state });
 export const addRepoSuccess = (state = INITIAL_STATE, { repo }) => {
-  return ({ ...state, repo: { [repo.id]: repo }  });
+  return ({ ...state, repo: { [repo.id]: repo, ...state.repo }  });
 }
 export const addRepoError = (state = INITIAL_STATE) => ({ ...state });
 export const removeRepo = (state = INITIAL_STATE, { payload }) => {
