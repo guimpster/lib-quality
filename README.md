@@ -4,7 +4,7 @@ LibQuality is a platform that collects GitHub issues, parses it, and then saves 
 
 ##### Architecture
 
-![LibQuality](.\LibQuality.png)
+![LibQuality](LibQuality.png)
 
 Basically, we can divide the system into 4 parts:
 
